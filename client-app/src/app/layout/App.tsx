@@ -7,6 +7,7 @@ import ActicityDashboard from '../../features/activities/dashboard/ActivityDashb
 
 export function App() {
     const [activities, setActivities] = useState<Activity[]>([]);
+    const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
 
     useEffect(() => {
         axios.get<Activity[]>('http://localhost:5000/api/activities')
@@ -15,14 +16,29 @@ export function App() {
             })
     }, [])
 
-  return (
-      <div>
-          <NavBar />
-          <Container style={{ marginTop: '7em' }}>
-              <ActicityDashboard activities={activities} />
-          </Container>
-          
-    </div>
-  );
+    function handleSelectedActivity(id: string) {
+        setSelectedActivity(activities.find(x => x.id === id));
+    }
+
+    function handleCancelSelectActivity() {
+        setSelectedActivity(undefined);
+    }
+
+    return (
+
+        <>
+            <NavBar />
+            <Container style={{ marginTop: '7em' }}>
+                <ActicityDashboard 
+                    activities={activities}
+                    selectedActivity={selectedActivity}
+                    selectActivity={handleSelectedActivity}
+                    cancelSelectActivity={handleCancelSelectActivity}
+                />
+            </Container>
+
+
+        </>
+    );
 }
 export default App;
