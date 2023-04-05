@@ -8,6 +8,7 @@ import ActicityDashboard from '../../features/activities/dashboard/ActivityDashb
 export function App() {
     const [activities, setActivities] = useState<Activity[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         axios.get<Activity[]>('http://localhost:5000/api/activities')
@@ -24,6 +25,15 @@ export function App() {
         setSelectedActivity(undefined);
     }
 
+    function handleOpenForm(id?: string) {
+        id ? handleSelectedActivity(id) : handleCancelSelectActivity;
+        setEditMode(true);
+    }
+
+    function handleFormClose() {
+        setEditMode(false);
+    }
+
     return (
 
         <>
@@ -34,6 +44,9 @@ export function App() {
                     selectedActivity={selectedActivity}
                     selectActivity={handleSelectedActivity}
                     cancelSelectActivity={handleCancelSelectActivity}
+                    editMode={editMode}
+                    openForm={handleOpenForm}
+                    closeForm={handleFormClose}
                 />
             </Container>
 
