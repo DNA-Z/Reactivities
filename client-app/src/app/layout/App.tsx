@@ -39,7 +39,7 @@ export function App() {
         <>
             <NavBar />
             <Container style={{ marginTop: '7em' }}>
-                <ActicityDashboard 
+                <ActicityDashboard
                     activities={activities}
                     selectedActivity={selectedActivity}
                     selectActivity={handleSelectedActivity}

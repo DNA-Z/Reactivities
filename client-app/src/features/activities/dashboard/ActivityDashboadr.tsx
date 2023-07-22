@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function ActicityDashboard({ activities, selectedActivity, selectActivity,
-        cancelSelectActivity }: Props) {
+    cancelSelectActivity, openForm, closeForm }: Props) {
     return (
         <Grid>
             <Grid.Column width='10'>
@@ -24,8 +24,11 @@ export default function ActicityDashboard({ activities, selectedActivity, select
             </Grid.Column>
             <Grid.Column width='6'>
                 {selectedActivity &&
-                    <ActivityDetail activity={selectedActivity} cancelSelectActivity={cancelSelectActivity} />}
-                <ActivityForm />
+                    <ActivityDetail
+                    activity={selectedActivity}
+                    cancelSelectActivity={cancelSelectActivity}
+                    />}
+                <ActivityForm/>
             </Grid.Column>
         </Grid>
         )
